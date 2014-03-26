@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="net.sf.sprockets.google.Places"/>
+<fullyQualifiedTypeName name="net.sf.sprockets.Sprockets"/>
+<fullyQualifiedTypeName name="java.net.URL"/>
+<fullyQualifiedTypeName name="sun.net.www.URLConnection"/>
+<fullyQualifiedTypeName name="java.io.ByteArrayOutputStream"/>
+<fullyQualifiedTypeName name="java.io.InputStream"/>
+</qualifiedTypeNameHistroy>
