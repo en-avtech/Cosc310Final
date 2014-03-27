@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 !SESSION 2014-03-26 16:50:46.013 -----------------------------------------------
+=======
+!SESSION 2014-03-26 10:07:13.852 -----------------------------------------------
+>>>>>>> origin/GeocodingTest
 eclipse.buildId=I20120608-1400
 java.version=1.7.0_07
 java.vendor=Oracle Corporation
@@ -6,6 +10,7 @@ BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
 Framework arguments:  -product org.eclipse.epp.package.java.product
 Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.java.product
 
+<<<<<<< HEAD
 !ENTRY org.eclipse.core.resources 2 10035 2014-03-26 16:50:58.068
 !MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
 
@@ -350,3 +355,7 @@ java.io.EOFException
 	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:584)
 	at org.eclipse.equinox.launcher.Main.run(Main.java:1438)
 	at org.eclipse.equinox.launcher.Main.main(Main.java:1414)
+=======
+!ENTRY org.eclipse.m2e.logback.appender 4 0 2014-03-26 10:24:55.751
+!MESSAGE Failed to open search index.
+>>>>>>> origin/GeocodingTest
