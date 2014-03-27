@@ -10,11 +10,15 @@ INDEX VERSION 1.126+C:\Users\Ephraim\Documents\GitHub\Cosc310Final\.metadata\.pl
 4108727661.index
 1927558450.index
 3974580528.index
+<<<<<<< HEAD
 =======
 >>>>>>> origin/GeocodingTest
+=======
+>>>>>>> origin/MapsTest
 1995173708.index
 1311274256.index
 305854171.index
+<<<<<<< HEAD
 <<<<<<< HEAD
 2914154122.index
 =======
@@ -23,6 +27,9 @@ INDEX VERSION 1.126+C:\Users\Ephraim\Documents\GitHub\Cosc310Final\.metadata\.pl
 2914154122.index
 3065916431.index
 >>>>>>> origin/GeocodingTest
+=======
+2914154122.index
+>>>>>>> origin/MapsTest
 163172794.index
 4155206848.index
 4108727661.index

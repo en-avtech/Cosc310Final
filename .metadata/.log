@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 !SESSION 2014-03-26 16:50:46.013 -----------------------------------------------
 =======
 !SESSION 2014-03-26 10:07:13.852 -----------------------------------------------
@@ -359,3 +360,18 @@ java.io.EOFException
 !ENTRY org.eclipse.m2e.logback.appender 4 0 2014-03-26 10:24:55.751
 !MESSAGE Failed to open search index.
 >>>>>>> origin/GeocodingTest
+=======
+
+!ENTRY org.eclipse.jdt.core 4 4 2014-03-26 13:44:36.603
+!MESSAGE Background Indexer Crash Recovery
+!STACK 0
+java.lang.ArrayIndexOutOfBoundsException: 19
+	at org.eclipse.jdt.internal.core.index.DiskIndex.computeDocumentNames(DiskIndex.java:338)
+	at org.eclipse.jdt.internal.core.index.DiskIndex.mergeWith(DiskIndex.java:515)
+	at org.eclipse.jdt.internal.core.index.Index.save(Index.java:198)
+	at org.eclipse.jdt.internal.core.search.indexing.IndexManager.saveIndex(IndexManager.java:807)
+	at org.eclipse.jdt.internal.core.search.indexing.IndexManager.saveIndexes(IndexManager.java:849)
+	at org.eclipse.jdt.internal.core.search.indexing.IndexManager.notifyIdle(IndexManager.java:569)
+	at org.eclipse.jdt.internal.core.search.processing.JobManager.run(JobManager.java:388)
+	at java.lang.Thread.run(Unknown Source)
+>>>>>>> origin/MapsTest
