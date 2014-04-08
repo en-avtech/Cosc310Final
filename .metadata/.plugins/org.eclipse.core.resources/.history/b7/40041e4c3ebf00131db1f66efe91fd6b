@@ -1,10 +1,4 @@
-import java.io.IOException;
 import java.util.Scanner;
-
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.xpath.XPathExpressionException;
-
-import org.xml.sax.SAXException;
 
 /**
  * We use a driver class BatterBotDriver which contains all of the components
@@ -53,58 +47,30 @@ public class BatterBotDriver
 			//This is expected to block waiting for input
 			input = IO.read(); 
 			
-			if(!input.contains("coordinates"))
-			{
-				//Decode the user input into keywords
-				KeyWordList keys = LP.extractKeyWords(input);
-				
-				if(template != null)
-					template.processResponse(input, keys);
-				
-				//Select the next response template
-				template = RS.selectTemplate(keys);
-				
-				//Build the response from template
-				String response = RB.buildResponse(template, keys);
-				
-				//Print the next response
-				IO.print(response);
-				
-				//Checks if the batterbot intends to end the conversation.
-				if(template.isValediction())
-					break;
-			}
-			else
-			{
-				geocoding();
-			}
+			//Decode the user input into keywords
+			KeyWordList keys = LP.extractKeyWords(input);
+			
+			if(template != null)
+				template.processResponse(input, keys);
+			
+			//Select the next response template
+			template = RS.selectTemplate(keys);
+			
+			//Build the response from template
+			String response = RB.buildResponse(template, keys);
+			
+			//Print the next response
+			IO.print(response);
+			
+			//Checks if the batterbot intends to end the conversation.
+			if(template.isValediction())
+				break;
 		}
 		
 		IO.close();
 	}
 	
 	
-	private void geocoding() 
-	{
-		Scanner scan = new Scanner(System.in);
-		System.out.println("At what address are you located?");
-		String address;
-		address = scan.nextLine();
-		
-		Geocoding geo = new Geocoding();
-		geo.setAddress(address);
-		try 
-		{
-			geo.main(null);
-		} 
-		catch (XPathExpressionException | IOException
-				| ParserConfigurationException | SAXException e) 
-		{
-			e.printStackTrace();
-		}
-	}
-
-
 	public void setup()
 	{
 		//This is just an example of what a response template definition will look like
@@ -381,25 +347,25 @@ public class BatterBotDriver
 				ResponseTemplate response44 = new ResponseTemplate(sentence44, bucket44, keys44);
 				
 				String[] sentence45 = {"What about",". Is that the kind of question to ask Batman?"};
-				String[][] bucket45 = null;
+				String[][] bucket45 = {{""}};
 				String[] keys45 = {"null"};
 		
 				ResponseTemplate response45 = new ResponseTemplate(sentence45, bucket45, keys45);
 				
 				String[] sentence46 = {"Who is "};
-				String[][] bucket46 = null;
+				String[][] bucket46 = {{""}};
 				String[] keys46 = {"null"};
 		
 				ResponseTemplate response46 = new ResponseTemplate(sentence46, bucket46, keys46);
 				
 				String[] sentence47 = {"Can you specify what you want to know about "};
-				String[][] bucket47 = null;
+				String[][] bucket47 = {{""}};
 				String[] keys47 = {"null"};
 		
 				ResponseTemplate response47 = new ResponseTemplate(sentence47, bucket47, keys47);
 				
 				String[] sentence48 = {"Why are you bothering Batman with questions about"};
-				String[][] bucket48 = null;
+				String[][] bucket48 = {{""}};
 				String[] keys48 = {"null"};
 		
 				ResponseTemplate response48 = new ResponseTemplate(sentence48, bucket48, keys48);
@@ -938,45 +904,52 @@ public class BatterBotDriver
 	
 	
 	public static void main(String[] args)
-	{
-		Scanner scan = new Scanner(System.in);
-		String input;
+	{	
 		System.setProperty("wordnet.database.dir", "C:\\Program Files (x86)\\WordNet\\2.1\\dict\\");
+		IOconsole ioconsole = new IOconsole();
+		BatterBotDriver bat = new BatterBotDriver(ioconsole);
 		
-		do
+		System.out.println("Connect to a server? (y/n):");
+		Scanner scan = new Scanner(System.in);
+		String input = scan.nextLine();
+		
+		if (input=="y")
 		{
-			System.err.println("Connect to a server? (y/n):");
-			input = scan.nextLine();
-		}
-		while(!input.equalsIgnoreCase("y") && !input.equalsIgnoreCase("n"));
-		
-		BatterBotDriver bat;
-		
-		if(input.equalsIgnoreCase("y"))
-		{
-			IOSocket io = new IOSocket();
-			io.setup();
-			bat = new BatterBotDriver(io);
-			bat.setupInterview();
+			IOSocket iosocket = new IOSocket();
+			iosocket.setup();
+			
+			BatterBotDriver interview = new BatterBotDriver(iosocket);
+			interview.setupInterview();
+			
+			try
+			{
+				interview.cycle();
+			}
+			catch(Exception e)
+			{
+				e.printStackTrace();
+				System.out.println(interview.LP.masterKeys);
+			}
+			
+			System.out.println(interview.LP.memTable.get("type"));
 		}
 		else
 		{
-			bat = new BatterBotDriver(new IOconsole());
 			bat.setup();
-		}
 		
-		try
-		{
-			bat.cycle();
+			try
+			{
+				bat.cycle();
+			}
+			catch(Exception e)
+			{
+				e.printStackTrace();
+				System.out.println(bat.LP.masterKeys);
+			}
+			
+			System.out.println(bat.LP.memTable.get("type"));
+			
 		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-			System.out.println(bat.LP.masterKeys);
-		}
-		
-		System.out.println(bat.LP.memTable.get("type"));
-		
+	scan.close();
 	}
-	
 }
