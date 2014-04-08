@@ -59,12 +59,12 @@ public class Geocoding
     // extract the result
     NodeList resultNodeList = null;
 
-//    // a) obtain the formatted_address field for every result
-//    resultNodeList = (NodeList) xpath.evaluate("/GeocodeResponse/result/formatted_address", geocoderResultDocument, XPathConstants.NODESET);
-//    for(int i=0; i<resultNodeList.getLength(); ++i) 
-//    {
-//      System.out.println(resultNodeList.item(i).getTextContent());
-//    }
+    // a) obtain the formatted_address field for every result
+    resultNodeList = (NodeList) xpath.evaluate("/GeocodeResponse/result/formatted_address", geocoderResultDocument, XPathConstants.NODESET);
+    for(int i=0; i<resultNodeList.getLength(); ++i) 
+    {
+      System.out.println(resultNodeList.item(i).getTextContent());
+    }
 
 //    // b) extract the locality for the first result
 //    resultNodeList = (NodeList) xpath.evaluate("/GeocodeResponse/result[1]/address_component[type/text()='locality']/long_name", geocoderResultDocument, XPathConstants.NODESET);

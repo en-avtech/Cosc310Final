@@ -59,12 +59,12 @@ public class Geocoding
     // extract the result
     NodeList resultNodeList = null;
 
-//    // a) obtain the formatted_address field for every result
-//    resultNodeList = (NodeList) xpath.evaluate("/GeocodeResponse/result/formatted_address", geocoderResultDocument, XPathConstants.NODESET);
-//    for(int i=0; i<resultNodeList.getLength(); ++i) 
-//    {
-//      System.out.println(resultNodeList.item(i).getTextContent());
-//    }
+    // a) obtain the formatted_address field for every result
+    resultNodeList = (NodeList) xpath.evaluate("/GeocodeResponse/result/formatted_address", geocoderResultDocument, XPathConstants.NODESET);
+    for(int i=0; i<resultNodeList.getLength(); ++i) 
+    {
+      System.out.println(resultNodeList.item(i).getTextContent());
+    }
 
 //    // b) extract the locality for the first result
 //    resultNodeList = (NodeList) xpath.evaluate("/GeocodeResponse/result[1]/address_component[type/text()='locality']/long_name", geocoderResultDocument, XPathConstants.NODESET);
@@ -81,8 +81,8 @@ public class Geocoding
       if("lat".equals(node.getNodeName())) lat = Float.parseFloat(node.getTextContent());
       if("lng".equals(node.getNodeName())) lng = Float.parseFloat(node.getTextContent());
     }
-    System.out.print("Your location in latitude/longitude coordinates is: ");
-    System.out.println("" + lat + "," + lng);
+    System.out.print("Your coordinates in ");
+    System.out.println("lat/lng=" + lat + "," + lng);
 
   }
 
