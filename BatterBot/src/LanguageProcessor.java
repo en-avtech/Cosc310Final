@@ -29,7 +29,7 @@ public class LanguageProcessor implements LanguageProcessorInterface, SharedData
 		if(kwl.size() == 0)
 			kwl.addKey("null");
 		
-		kwl.addKey("abc");
+		//kwl.addKey("abc");
 		return kwl;
 	}
 	

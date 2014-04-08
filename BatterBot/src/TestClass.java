@@ -14,8 +14,9 @@ public class TestClass
 	    URL url = null;
 		try 
 		{
-			url = new URL("https://ajax.googleapis.com/ajax/services/feed/find?" + "v=1.0&q=Official%20Google%20Blog");
-		} catch (MalformedURLException e) 
+			url = new URL("https://ajax.googleapis.com/ajax/services/feed/find?v=1.0&q=Official%20Google%20Blog");
+		} 
+		catch (MalformedURLException e) 
 		{
 			e.printStackTrace();
 		}

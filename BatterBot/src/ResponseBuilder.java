@@ -51,7 +51,7 @@ public class ResponseBuilder implements ResponseBuilderInterface
 				}
 						
 		}
-		template.setAsked();
+		//template.setAsked();
 		return response;
 
 	}

@@ -347,25 +347,25 @@ public class BatterBotDriver
 				ResponseTemplate response44 = new ResponseTemplate(sentence44, bucket44, keys44);
 				
 				String[] sentence45 = {"What about",". Is that the kind of question to ask Batman?"};
-				String[][] bucket45 = {{""}};
+				String[][] bucket45 = null;
 				String[] keys45 = {"null"};
 		
 				ResponseTemplate response45 = new ResponseTemplate(sentence45, bucket45, keys45);
 				
 				String[] sentence46 = {"Who is "};
-				String[][] bucket46 = {{""}};
+				String[][] bucket46 = null;
 				String[] keys46 = {"null"};
 		
 				ResponseTemplate response46 = new ResponseTemplate(sentence46, bucket46, keys46);
 				
 				String[] sentence47 = {"Can you specify what you want to know about "};
-				String[][] bucket47 = {{""}};
+				String[][] bucket47 = null;
 				String[] keys47 = {"null"};
 		
 				ResponseTemplate response47 = new ResponseTemplate(sentence47, bucket47, keys47);
 				
 				String[] sentence48 = {"Why are you bothering Batman with questions about"};
-				String[][] bucket48 = {{""}};
+				String[][] bucket48 = null;
 				String[] keys48 = {"null"};
 		
 				ResponseTemplate response48 = new ResponseTemplate(sentence48, bucket48, keys48);
@@ -904,52 +904,45 @@ public class BatterBotDriver
 	
 	
 	public static void main(String[] args)
-	{	
-		System.setProperty("wordnet.database.dir", "C:\\Program Files (x86)\\WordNet\\2.1\\dict\\");
-		IOconsole ioconsole = new IOconsole();
-		BatterBotDriver bat = new BatterBotDriver(ioconsole);
-		
-		System.out.println("Connect to a server? (y/n):");
+	{
 		Scanner scan = new Scanner(System.in);
-		String input = scan.nextLine();
+		String input;
+		System.setProperty("wordnet.database.dir", "C:\\Program Files (x86)\\WordNet\\2.1\\dict\\");
 		
-		if (input=="y")
+		do
 		{
-			IOSocket iosocket = new IOSocket();
-			iosocket.setup();
-			
-			BatterBotDriver interview = new BatterBotDriver(iosocket);
-			interview.setupInterview();
-			
-			try
-			{
-				interview.cycle();
-			}
-			catch(Exception e)
-			{
-				e.printStackTrace();
-				System.out.println(interview.LP.masterKeys);
-			}
-			
-			System.out.println(interview.LP.memTable.get("type"));
+			System.err.println("Connect to a server? (y/n):");
+			input = scan.nextLine();
+		}
+		while(!input.equalsIgnoreCase("y") && !input.equalsIgnoreCase("n"));
+		
+		BatterBotDriver bat;
+		
+		if(input.equalsIgnoreCase("y"))
+		{
+			IOSocket io = new IOSocket();
+			io.setup();
+			bat = new BatterBotDriver(io);
+			bat.setupInterview();
 		}
 		else
 		{
+			bat = new BatterBotDriver(new IOconsole());
 			bat.setup();
-		
-			try
-			{
-				bat.cycle();
-			}
-			catch(Exception e)
-			{
-				e.printStackTrace();
-				System.out.println(bat.LP.masterKeys);
-			}
-			
-			System.out.println(bat.LP.memTable.get("type"));
-			
 		}
-	scan.close();
+		
+		try
+		{
+			bat.cycle();
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			System.out.println(bat.LP.masterKeys);
+		}
+		
+		System.out.println(bat.LP.memTable.get("type"));
+		
 	}
+	
 }
