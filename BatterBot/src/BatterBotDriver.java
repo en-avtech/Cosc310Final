@@ -1,4 +1,10 @@
+import java.io.IOException;
 import java.util.Scanner;
+
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.xpath.XPathExpressionException;
+
+import org.xml.sax.SAXException;
 
 /**
  * We use a driver class BatterBotDriver which contains all of the components
@@ -47,30 +53,58 @@ public class BatterBotDriver
 			//This is expected to block waiting for input
 			input = IO.read(); 
 			
-			//Decode the user input into keywords
-			KeyWordList keys = LP.extractKeyWords(input);
-			
-			if(template != null)
-				template.processResponse(input, keys);
-			
-			//Select the next response template
-			template = RS.selectTemplate(keys);
-			
-			//Build the response from template
-			String response = RB.buildResponse(template, keys);
-			
-			//Print the next response
-			IO.print(response);
-			
-			//Checks if the batterbot intends to end the conversation.
-			if(template.isValediction())
-				break;
+			if(!input.contains("coordinates"))
+			{
+				//Decode the user input into keywords
+				KeyWordList keys = LP.extractKeyWords(input);
+				
+				if(template != null)
+					template.processResponse(input, keys);
+				
+				//Select the next response template
+				template = RS.selectTemplate(keys);
+				
+				//Build the response from template
+				String response = RB.buildResponse(template, keys);
+				
+				//Print the next response
+				IO.print(response);
+				
+				//Checks if the batterbot intends to end the conversation.
+				if(template.isValediction())
+					break;
+			}
+			else
+			{
+				geocoding();
+			}
 		}
 		
 		IO.close();
 	}
 	
 	
+	private void geocoding() 
+	{
+		Scanner scan = new Scanner(System.in);
+		System.out.println("At what address are you located?");
+		String address;
+		address = scan.nextLine();
+		
+		Geocoding geo = new Geocoding();
+		geo.setAddress(address);
+		try 
+		{
+			geo.main(null);
+		} 
+		catch (XPathExpressionException | IOException
+				| ParserConfigurationException | SAXException e) 
+		{
+			e.printStackTrace();
+		}
+	}
+
+
 	public void setup()
 	{
 		//This is just an example of what a response template definition will look like
